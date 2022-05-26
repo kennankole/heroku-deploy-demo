@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 
 home = Blueprint('home', __name__)
 
-@home.route('/')
+@home.route('/', methods=['GET', 'POST'])
 def home_page():
     books = models.Author.query.all()
     return render_template('home.html', books=books)
