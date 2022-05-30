@@ -11,6 +11,8 @@ flask-migrate = "*"
 flask-wtf = "*"
 pillow = "*"
 gunicorn = "*"
+boto3 = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
