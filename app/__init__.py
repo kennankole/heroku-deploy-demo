@@ -16,7 +16,7 @@ def create_app():
     with app.app_context():
         from app.routes import home 
         app.register_blueprint(home)
-        db.create_all()
+        # db.create_all()
         migrate.init_app(app, db, render_as_batch=True)
         
     return app
