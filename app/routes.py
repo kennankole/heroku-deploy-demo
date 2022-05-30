@@ -133,7 +133,7 @@ def update_profile(username, avatar_url):
         return
     return
  
-@home.route("/submit-form", methods=['POST'])
+@home.route("/submit-form", methods=['POST', 'GET'])
 def submit_form():
     username = request.form['username']
     avatar_url = request.form['avatar-url']
