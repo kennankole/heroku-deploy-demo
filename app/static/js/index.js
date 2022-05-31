@@ -5,9 +5,10 @@ once the document has loaded, and starts the upload process.
 The function also determines the file object to be uploaded. 
 If one has been selected properly, it proceeds to call a function to obtain a signed POST request for the file. 
 */
+
 (function() {
-    document.getElementById('file_input').onchange = function(){
-        var files = document.getElementById("file_input").files;
+    document.getElementById('image').onchange = function(){
+        var files = document.getElementById("image").files;
         var file = files[0];
         if(!file){
             return alert("No file selected.");

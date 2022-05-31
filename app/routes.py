@@ -1,6 +1,7 @@
 from cmath import exp
 import json
 import os
+from random import random
 import secrets
 from PIL import Image
 import boto3
@@ -39,7 +40,17 @@ def save_photo(picture):
         return picture_name
     except:
         pass 
-    return
+    return 
+
+def resize_image(picture):
+    random_no = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(picture.filename)
+    picture_name = random_no + f_ext 
+    output_size = (250, 250)
+    i = Image.open(picture)
+    i.thumbnail(output_size)
+    return 
+
 
 @home.route('/create', methods=['GET', 'POST'])
 def create_book():
@@ -62,17 +73,20 @@ def book_detail(id):
 def update_books(id):
     book = models.Author.query.get(id)
     form = AuthorUpdateForm()
-    if form.validate_on_submit():
-        app = create_app()
-        if form.photo.data:
-            photo_file = save_photo(form.photo.data)
-            image_name = os.path.join(app.root_path, 'static/photos', photo_file)
-            s3_client = boto3.client('s3')
-            response = s3_client.upload_file(image_name, Config.AWS_BUCKET_NAME, photo_file)
+    if request.form == 'POST':
+        uploaded_image = request.files['file']
+        file_name = secure_filename(uploaded_image.filename)
+    # if form.validate_on_submit():
+        if uploaded_image.filename:
+            photo_file = save_photo(file_name)
+            # image_name = os.path.join(app.root_path, 'static/photos', photo_file)
+            # s3_client = boto3.client('s3')
+            # response = s3_client.upload_file(image_name, Config.AWS_BUCKET_NAME, photo_file)
             book.photo = photo_file
+            print(photo_file, "here")
             db.session.add(book)
             db.session.commit()
-            print(response)
+        print(photo_file, "here", form.errors)
         return redirect(url_for('home.book_detail', id=book.id))
     elif request.method == 'GET':
         pass 
@@ -118,25 +132,26 @@ def sign_s3():
         'url':'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, file_name)
     })
     
-
-def update_profile(username, avatar_url):
-    if request.method == 'POST':
-        avatar_url = request.files['avatar-url']
-        if avatar_url.filename != '':
-            save_photo(avatar_url)
-            new_user = models.Author(
-                name=username,
-                photo=avatar_url.filename
-            )
-            db.session.add(new_user)
-            db.session.commit()
-        return
-    return
- 
-@home.route("/submit-form", methods=['POST', 'GET'])
+@home.route("/submit-form/", methods=['POST', 'GET'])
 def submit_form():
-    username = request.form['username']
-    avatar_url = request.form['avatar-url']
-    
-    update_profile(username, avatar_url)
-    return redirect(url_for('home.home_page'))
+    app = create_app()
+    if request.method == 'POST':
+        username = request.form['username']
+        avatar_url = request.files['image']
+        if avatar_url.filename != '':
+            random_no = secrets.token_hex(8)
+            _, f_ext = os.path.splitext(avatar_url.filename)
+            picture_name = random_no + f_ext 
+            picture_path = os.path.join(app.root_path, 'static/photos', picture_name)
+            output_size = (250, 250)
+            i = Image.open(avatar_url)
+            i.thumbnail(output_size)
+            i.save(picture_path)
+        new_user = models.Author(
+            name=username,
+            photo=avatar_url.filename
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('home.home_page'))
+    return render_template('upload.html')
