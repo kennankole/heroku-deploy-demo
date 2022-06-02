@@ -44,6 +44,7 @@ def save_photo(picture):
     except:
         pass 
     return 
+
 @home.route('/create', methods=['GET', 'POST'])
 def create_book():
     book = models.Author()
