@@ -11,6 +11,7 @@ class Config:
     AW_SECRET_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_ACCESS_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_BUCKET_NAME = os.getenv('BUCKET_NAME')
+    BUCKET_REGION = os.getenv("BUCKET_REGION")
     
     
 class Development(Config):

@@ -11,6 +11,7 @@
         Name: {{ book.name }}
         {% if book.photo %}
         <img src="{{ url_for('static', filename='photos/' + book.photo )}}" alt="Photo">
+        <a href="https://{{bucket_name}}.s3.{{bucket_location}}.amazonaws.com/{{book.photo}}">+View Image</a>
         {% endif %}
     </p>
 </body>

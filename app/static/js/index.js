@@ -7,8 +7,8 @@ If one has been selected properly, it proceeds to call a function to obtain a si
 */
 
 (function() {
-    document.getElementById('image').onchange = function(){
-        var files = document.getElementById("image").files;
+    document.getElementById('file_input').onchange = function(){
+        var files = document.getElementById("file_input").files;
         var file = files[0];
         if(!file){
             return alert("No file selected.");
@@ -37,7 +37,7 @@ function getSignedRequest(file){
                 uploadFile(file, response.data, response.url);
             }
             else{
-                alert("Could no get signed URL.");
+                alert(`Could no get signed URL ${xhr.responseText} ${xhr.readyState} ${xhr.status}`);
             }
         }
     };
