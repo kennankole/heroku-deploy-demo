@@ -11,4 +11,4 @@ COPY ./Pipfile* /application/
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
 
 COPY . /application/
-CMD gunicorn web: gunicorn wsgi:app --bind 0.0.0.0:$PORT
+CMD gunicorn wsgi:app --bind 0.0.0.0:$PORT
