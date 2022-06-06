@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv('.env')
 class Config:
     FLASK_ENV = os.getenv('FLASK_ENV')
     FLASK_APP = os.getenv('FLASK_APP')
