@@ -1,4 +1,6 @@
 import os
+from pickle import TRUE
+from re import T
 from dotenv import load_dotenv
 
 load_dotenv('.env')
@@ -17,5 +19,12 @@ class Config:
     
 print(Config.AWS_BUCKET_NAME)
 class Development(Config):
-    SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/book.db" 
-    #"postgresql://vugibyuzfknulz:f693d14fed9a1d975df923280fd878dea9d261a4c1dc40ea304e84ce2ac93845@ec2-34-230-153-41.compute-1.amazonaws.com:5432/dbdh3og7qq27er"
+    SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/book.db"
+  
+  
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = "sqlite:///memory:"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    TESTING = True
+    
+    

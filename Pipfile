@@ -14,8 +14,9 @@ gunicorn = "*"
 boto3 = "*"
 python-dotenv = "*"
 requests = "*"
+pytest = "*"
+coverage = "*"
 
 [dev-packages]
-
 [requires]
 python_version = "3.8"
