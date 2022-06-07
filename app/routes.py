@@ -17,7 +17,9 @@ from app.config import Config as AppConfig
 
 home = Blueprint('home', __name__)
 
-
+@home.route('/home', methods=['GET', 'POST'])
+def nyumbani():
+    return "Hello there!"
 
 @home.route('/', methods=['GET', 'POST'])
 def home_page():
