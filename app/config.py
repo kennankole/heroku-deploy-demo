@@ -18,6 +18,7 @@ class Config:
     GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
     GOOGLE_DISCOVERY_URL = os.getenv('GOOGLE_DISCOVERY_URL')
 
+print(Config.GOOGLE_DISCOVERY_URL)
 class Development(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/book.db"
     
