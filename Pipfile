@@ -16,7 +16,12 @@ python-dotenv = "*"
 requests = "*"
 pytest = "*"
 coverage = "*"
+oauthlib = "*"
+pyopenssl = "*"
+flask-login = "*"
+pytest-cov = "*"
 
 [dev-packages]
+
 [requires]
 python_version = "3.8"

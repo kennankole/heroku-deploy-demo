@@ -1,3 +1,3 @@
 def test_home(client):
-    response = client.get('/home')
-    assert b"Hello there!" in response.data
+    assert client.get('/home').status_code == 200
+    

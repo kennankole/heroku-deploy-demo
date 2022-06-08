@@ -1,1 +1,6 @@
 .env
+.coveragerc
+.coverage
+.pytest*
+htmlcov
+pytest.ini
