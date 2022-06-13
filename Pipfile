@@ -20,6 +20,7 @@ oauthlib = "*"
 pyopenssl = "*"
 flask-login = "*"
 pytest-cov = "*"
+flask-talisman = "*"
 
 [dev-packages]
 

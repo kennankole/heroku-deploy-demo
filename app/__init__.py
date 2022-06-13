@@ -2,10 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_talisman import Talisman
+
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 migrate = Migrate()
+talis_mane = Talisman()
 
 def create_app():
     app = Flask(__name__)
@@ -14,6 +17,7 @@ def create_app():
     else:
         app.config.from_object('app.config.Config')
     db.init_app(app)
+    
     with app.app_context():
         from app.routes import home 
         from app.auth.routes import auth
@@ -24,5 +28,6 @@ def create_app():
         migrate.init_app(app, db, render_as_batch=True)
         
         login_manager.init_app(app)
+        talis_mane.init_app(app)
         
     return app
