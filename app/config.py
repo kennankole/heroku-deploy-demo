@@ -18,7 +18,9 @@ class Config:
     GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
     GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
 
-print(Config.GOOGLE_DISCOVERY_URL)
+    # https://127.0.0.1:5000
+    # https://127.0.0.1:5000/login/callback
+
 class Development(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/book.db"
     

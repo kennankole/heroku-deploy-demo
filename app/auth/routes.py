@@ -34,7 +34,7 @@ def login():
     return redirect(request_uri)
 
 
-@auth.route('/login/callback', methods=['POST', 'GET'])
+@auth.route('/login/callback')
 def callback():
     code = request.args.get('code')
     google_provider_cfg = get_google_provider_cfg()
