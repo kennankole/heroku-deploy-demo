@@ -6,7 +6,7 @@ app = create_app()
 
 Talisman(app, content_security_policy=None)
 if __name__ == '__main__':
-    app.run(ssl_context="adhoc", debug=False)
+    app.run(debug=False)
     
 
 # Procfile command gunicorn 
