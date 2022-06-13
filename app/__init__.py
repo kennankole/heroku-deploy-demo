@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_talisman import Talisman
 
 
 
@@ -12,6 +13,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
+    
     if app.config['ENV'] == 'development':
         app.config.from_object('app.config.Development')
     else:
@@ -27,6 +29,7 @@ def create_app():
             db.create_all()
         migrate.init_app(app, db, render_as_batch=True)
         
+        Talisman(app)
         login_manager.init_app(app)
        
         
