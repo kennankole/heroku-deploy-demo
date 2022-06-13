@@ -1,13 +1,12 @@
 from app import create_app
-from app.config import Config
+from flask_talisman import Talisman
 
 app = create_app()
 
+
+Talisman(app, content_security_policy=None)
 if __name__ == '__main__':
-    if Config.FLASK_ENV == 'development':
-        app.run(ssl_context="adhoc", debug=True)
-    else:
-        app.run(ssl_context="adhoc", debug=False)
+    app.run(ssl_context="adhoc", debug=False)
     
 
 # Procfile command gunicorn 
