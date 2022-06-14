@@ -2,7 +2,7 @@
 build:
   docker:
     web: Dockerfile
-    worker: /app/ngnix/Dockerfile
+    worker: /app/nginx/Dockerfile
 release:
   command:
     - gunicorn --bind 0.0.0.0:5000 wsgi:app
