@@ -28,8 +28,6 @@ def create_app():
         if app.config['ENV'] == 'development':
             db.create_all()
         migrate.init_app(app, db, render_as_batch=True)
-        
-        Talisman(app)
         login_manager.init_app(app)
        
         

@@ -8,7 +8,13 @@ WORKDIR /application
 RUN pip install --upgrade pip && pip install pipenv
 
 COPY ./Pipfile* /application/
+
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
 
+COPY ./entrypoint.sh /application/
 COPY . /application/
-CMD gunicorn wsgi:app --bind 0.0.0.0:$PORT
+EXPOSE 5000
+
+# CMD ["gunicorn", "wsgi:app" , "--bind 0.0.0.0:$PORT]
+# ENTRYPOINT ["/application/entrypoint.sh"]
+

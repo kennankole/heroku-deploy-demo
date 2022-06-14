@@ -1,6 +1,4 @@
 import os
-from pickle import TRUE
-from re import T
 from dotenv import load_dotenv
 
 load_dotenv()
