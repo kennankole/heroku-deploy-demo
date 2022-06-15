@@ -6,11 +6,11 @@ app = create_app()
 
 # Talisman(app, content_security_policy=None)
 if __name__ == '__main__':
-    app.run(debug=True)
-    # if app.config["ENV"] == "development":
-    #     app.run()
-    # else:
-    #     app.run()
+    # app.run(debug=True)
+    if app.config["ENV"] == "development":
+        app.run(debug=True)
+    else:
+        app.run(debug=False)
     
 # ssl_context="adhoc",
 # Procfile command gunicorn 
