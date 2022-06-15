@@ -25,8 +25,8 @@ def create_app():
         from app.auth.routes import auth
         app.register_blueprint(home)
         app.register_blueprint(auth)
-        if app.config['ENV'] == 'development':
-            db.create_all()
+        # if app.config['ENV'] == 'development':
+        db.create_all()
         migrate.init_app(app, db, render_as_batch=True)
         login_manager.init_app(app)
        
