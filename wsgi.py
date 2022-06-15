@@ -10,6 +10,7 @@ if __name__ == '__main__':
     if app.config["ENV"] == "development":
         app.run(debug=True)
     else:
+        Talisman(app, content_security_policy=None)
         app.run(debug=False)
     
 # ssl_context="adhoc",
