@@ -46,7 +46,6 @@ def callback():
         redirect_url=request.base_url,
         code=code
     )
-    print(request.base_url)
     token_reponse = requests.post(
         token_url,
         headers=headers,
@@ -72,6 +71,7 @@ def callback():
         email=users_email,
         profile_pic=picture   
     )
+    
     if not User.query.filter_by(unique_id=unique_id).first():
         db.session.add(user)
         db.session.commit()

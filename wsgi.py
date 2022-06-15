@@ -9,9 +9,10 @@ app = create_app()
 if __name__ == '__main__':
     # app.run(debug=True)
     if Config.FLASK_ENV == "development":
+        print("development")
         app.run(ssl_context="adhoc", debug=True)
     else:
-        Talisman(app, content_security_policy=None)
+        # Talisman(app, content_security_policy=None)
         app.run(ssl_context="adhoc", debug=False)
     
 # ssl_context="adhoc",
