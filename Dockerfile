@@ -13,7 +13,7 @@ RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
 
 COPY ./entrypoint.sh /application/
 COPY . /application/
-EXPOSE 5000
+# EXPOSE 5000
 
 # CMD ["gunicorn", "wsgi:app" , "--bind 0.0.0.0:$PORT]
 # ENTRYPOINT ["/application/entrypoint.sh"]

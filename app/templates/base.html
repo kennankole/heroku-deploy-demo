@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Bread Of Life Ministry</title>
+    {% endblock title%}
+</head>
+
+<body>
+    <div class="brand">
+        <img src="{{ url_for('static', filename='photos/logo.png' )}}" alt="" class="logo" >
+      </div>
+
+    <nav class="nav">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('home.home_page') }}" class="nav-link">Home</a>
+        <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
+        <a href="#" class="nav-link">Online School Of The Prophets</a>
+        <a href="#" class="nav-link">Support us</a>
+        <a href="#" class="nav-link">About us</a>
+        {% else %}
+        <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
+        {% endif %}
+    </nav>
+    <script src="{{url_for('static', filename='js/index.js') }}"></script>
+    {% block content %}
+    <div class="container">
+        <div class="home-page">
+            <h1 class="animate__animated animate__zoomIn">Bread Of Life Ministry, Kenya.</h1>
+        </div>
+    </div >
+    {% endblock content%}
+
+    <!--Footer-->
+    <footer id="footer-content">
+        <div class="footer-content">
+        <div class="footer">
+            <div class="footer-box">
+                <div class="media media1">
+                    <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+                </div>
+                <div class="media media2">
+                    <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                </div>
+                <div class="media media3">
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+                <div class="media media4">
+                    <a href="#"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>   
+</body>
+</html>

@@ -90,7 +90,7 @@ def logout():
     return redirect(url_for('auth.index'))
 
 
-@auth.route('/', methods=['GET'])
+@auth.route('/account', methods=['GET'])
 def index():
     return render_template('auth/account.html')
     
