@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/school.css') }}">
+{% endblock styles %}
+{% block title %}
+<title>Online School of the prophets.</title>
+{% endblock title %}
+
+{% block content %}
+<section class="container">
+    <div class="school-box">
+        <!--Videos-->
+        <div class="card section-card animate__animated animate__zoomIn">
+            <h3>Videos Archives</h3>
+            <iframe id="section-img" 
+            src="https://www.youtube.com/embed/chgEsFGvt5M?list=PLJZOHLq9obNYXJRWMT2kN8a_sEeIRUhTf" 
+            title="Mark Bruce - An Overview of the Reform Lines" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+            </iframe>
+            <p id="section-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+                cupidatat non proident, <a href="#">Enroll now</a>
+            </p>
+        </div>
+        <!--Newsletter-->
+        <div class="card section-card animate__animated animate__zoomIn">
+            <h3>Newsletters and Articles</h3>
+            <img src="{{ url_for('static', filename='photos/periodicals.jpg' )}}"   alt="" id="section-img">
+            <p id="section-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+                cupidatat non proident, <a href="#">Enroll now</a>
+            </p>
+            
+        </div>
+        <!--Online School-->
+        <div class="card section-card animate__animated animate__zoomIn">
+            <h3>God's Word Taught Online</h3>
+            <img src="{{ url_for('static', filename='photos/mountain.jpg') }}" alt="" id="section-img">
+            <p id="section-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+                cupidatat non proident, <a href="#">Enroll now</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

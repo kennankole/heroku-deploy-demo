@@ -4,7 +4,6 @@ from app.config import Config
 
 app = create_app()
 
-
 # Talisman(app, content_security_policy=None)
 if __name__ == '__main__':
     # app.run(debug=True)
