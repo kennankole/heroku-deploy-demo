@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Ubuntu:wght@500&display=swap');
+
 #section-img {
     width: 350px;
     height: 200px;
@@ -33,10 +35,31 @@
     font-weight: bold;
 }
 
-
-
 .section-card{
     -webkit-box-shadow: 0 10px 6px -6px #777;
        -moz-box-shadow: 0 10px 6px -6px #777;
             box-shadow: 0 10px 6px -6px #777;
-  }
+}
+.documents {
+    display: flex;
+    grid-template-columns: 100px 50px 100px;
+    grid-template-rows: 80px auto 80px; 
+    column-gap: 10px;
+    row-gap: 15px;
+    justify-content: center;
+}
+/* Articles styles */
+#article-text {  
+    font-size: medium;
+    color: rgb(255, 255, 255);
+    text-transform: capitalize;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+a:link { text-decoration: none; }
+
+#article-title {
+    text-align: center;
+}
+

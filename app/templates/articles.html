@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/school.css' )}}">
+{% endblock styles %}
+{% if not docs %}
+<form action="" enctype="multipart/form-data" method="post">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
+{% else %}
+<h1 id="article-title" class="animate__animated animate__zoomIn">Articles.</h1>
+    {% for i in docs %}
+<div class="documents">
+    <a href="{{url_for('home.uploaded_file', name=i)}}" target="_blank">
+        <br>
+        <br>
+        <h3 class="animate__animated animate__zoomIn" id="article-text">
+            Article Name
+        </h3>
+        <embed src="{{url_for('static' , filename='documents/' +i) }}#view=fitH" type="application/pdf" height="600" width="500"> 
+    </a>
+    
+</div>
+        <!-- <a href="https://{{bucket_name}}.s3.{{bucket_location}}.amazonaws.com/{{i}}">+View Image</a> -->
+{% endfor %}
+{% endif %}
+{% endblock content %}
+
+

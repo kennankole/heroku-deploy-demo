@@ -1,41 +1,54 @@
-# import boto3
-# from app.config import Config as AppConfig
-# from botocore.client import Config
+import requests
+import boto3
+from app.config import Config as AppConfig
+from botocore.client import Config
 
 
-# acl = 'public-read'
-# fields = {"acl": acl, "Content-Type":  "image/jpeg"}
-# conditions = [
-#     {"acl": acl},
-#     ["starts-with", "$Content-Type", ""]
-# ]
 
-# def s3_direct_upload(file_name):
-#     s3_client = boto3.client(
-#         's3',
-#         aws_access_key_id=AppConfig.AWS_ACCESS_ID,
-#         aws_secret_access_key=AppConfig.AW_SECRET_KEY,
-#         config=Config(signature_version='s3v4'),
-#         region_name='eu-central-1'
-        
-#     )
+acl = 'public-read'
+fields = {"acl": acl, "Content-Type":  "application/pdf"}
+conditions = [
+    {"acl": acl},
+    ["starts-with", "$Content-Type", ""]
+]
 
-#     response = s3_client.generate_presigned_post(
-#                     Bucket=AppConfig.AWS_BUCKET_NAME,
-#                     Key=file_name,
-#                     ExpiresIn=3600,
-#                     Fields=fields,
-#                     Conditions=conditions
-#                 )
-#     return response
+def s3_direct_upload(file_name):
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=AppConfig.AWS_ACCESS_ID,
+        aws_secret_access_key=AppConfig.AW_SECRET_KEY,
+        config=Config(signature_version='s3v4'),
+        region_name='eu-central-1' 
+    )
+
+    response = s3_client.generate_presigned_post(
+                    Bucket=AppConfig.AWS_BUCKET_NAME,
+                    Key=file_name,
+                    ExpiresIn=3600,
+                    Fields=fields,
+                    Conditions=conditions
+                )
+    return response
 
 
-# import requests
-# import os
-# import secrets
-# from PIL import Image
+def list_all_uploaded_files():
+    s3 = boto3.client('s3')
+    contents = []
+    for item in s3.list_objects(Bucket=AppConfig.AWS_BUCKET_NAME)['Contents']:
+        contents.append(item)
+    return f"All images {contents}"
 
-# import boto3
+
+
+ALLOWED_EXTENSIONS={'pdf'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def get_google_provider_cfg():
+    return requests.get(AppConfig.GOOGLE_DISCOVERY_URL).json()
 
 # from flask import Blueprint, redirect, render_template, request, url_for
 # from app.forms import AuthorForm, AuthorUpdateForm
@@ -45,21 +58,6 @@
 
 
 # from app.config import Config as AppConfig
-
-
-# home = Blueprint('home', __name__)
-
-# @home.route('/home', methods=['GET', 'POST'])
-# def nyumbani():
-#     return "Hello there!"
-
-# @home.route('/', methods=['GET', 'POST'])
-# def home_page():
-#     try:
-#         books = models.Author.query.all()
-#         return render_template('home.html', books=books)
-#     except:
-#         return "No Authors!!"
 
 
 # def save_photo(picture):
@@ -140,16 +138,3 @@
     
     
 # @home.route('/images', methods=['GET', 'POST'])
-# def list_all_uploaded_files():
-#     s3 = boto3.client('s3')
-#     contents = []
-#     for item in s3.list_objects(Bucket=AppConfig.AWS_BUCKET_NAME)['Contents']:
-#         contents.append(item)
-#     return f"All images {contents}"
-
-
-
-import requests
-from app.config import Config
-def get_google_provider_cfg():
-    return requests.get(Config.GOOGLE_DISCOVERY_URL).json()

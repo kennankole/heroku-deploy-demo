@@ -23,8 +23,12 @@ def create_app():
     with app.app_context():
         from app.routes import home 
         from app.auth.routes import auth
+        from app.school.routes import school
+        
         app.register_blueprint(home)
         app.register_blueprint(auth)
+        app.register_blueprint(school)
+        
         # if app.config['ENV'] == 'development':
         db.create_all()
         migrate.init_app(app, db, render_as_batch=True)

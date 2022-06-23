@@ -11,7 +11,9 @@
     <div class="school-box">
         <!--Videos-->
         <div class="card section-card animate__animated animate__zoomIn">
-            <h3>Videos Archives</h3>
+            <a href="https://www.youtube.com/channel/UCRl3hHCwDRH2CwbV2jwjlQA">
+                <h3>Videos Archives</h3>
+            </a>
             <iframe id="section-img" 
             src="https://www.youtube.com/embed/chgEsFGvt5M?list=PLJZOHLq9obNYXJRWMT2kN8a_sEeIRUhTf" 
             title="Mark Bruce - An Overview of the Reform Lines" frameborder="0" 
@@ -29,7 +31,9 @@
         </div>
         <!--Newsletter-->
         <div class="card section-card animate__animated animate__zoomIn">
-            <h3>Newsletters and Articles</h3>
+            <a href="{{url_for('home.list_documents') }}">
+                <h3>Newsletters and Articles</h3>
+            </a>
             <img src="{{ url_for('static', filename='photos/periodicals.jpg' )}}"   alt="" id="section-img">
             <p id="section-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
@@ -43,7 +47,7 @@
         </div>
         <!--Online School-->
         <div class="card section-card animate__animated animate__zoomIn">
-            <h3>God's Word Taught Online</h3>
+            <a href="{{ url_for('school.school_home' ) }}">  <h3>God's Word Taught Online</h3> </a>
             <img src="{{ url_for('static', filename='photos/mountain.jpg') }}" alt="" id="section-img">
             <p id="section-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
