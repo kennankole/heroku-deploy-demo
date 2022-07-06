@@ -1,5 +1,7 @@
 from flask_login import UserMixin
+from datetime import datetime
 from app import db
+
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -28,6 +30,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(), index=True)
     email = db.Column(db.String(), index=True)
     profile_pic = db.Column(db.String())
+    article_id = db.relationship('Document', cascade='all, delete', backref='user', lazy=True)
     
     
     def __init__(self, unique_id, username, email, profile_pic):
@@ -42,3 +45,12 @@ class User(UserMixin, db.Model):
     
     def __repr__(self) -> str:
         return f"User {self.username}"
+    
+    
+class Document(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.Integer, db.ForeignKey('user.id'))
+    title = db.Column(db.String(150))
+    pdf_file = db.Column(db.String())
+    pdf_thumbnail = db.Column(db.String())
+    date = db.Column(db.DateTime, default=datetime.utcnow)

@@ -21,8 +21,17 @@ pyopenssl = "*"
 flask-login = "*"
 pytest-cov = "*"
 flask-talisman = "*"
+pyexiftool = "*"
+wand = "*"
+pyscribus = "*"
+drawio = "*"
+rawpy = "*"
+vtk = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
+
+[packages.preview-generator]
+extras = [ "all",]

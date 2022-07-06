@@ -1,0 +1,29 @@
+.support-container{
+    padding: 10px;
+    margin: auto;
+    width: 100vh;
+    display: flex;
+    background: rgba(114, 117, 114, 0.7);
+    border-radius: 20px;
+}
+
+.details {
+    width: 100vh;
+    padding: 10px;
+    margin: 10px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.charity-icon{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.donate-img{
+    height: 75px;
+    width: 75px;
+}

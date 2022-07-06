@@ -1,65 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Ubuntu:wght@500&display=swap');
 
 #section-img {
-    width: 350px;
+    width: 349px;
+    /* height: 233px; */
     height: 200px;
-    justify-content: space-evenly;
 }
-
-.container {
-    width: 100%;
-    height: 100%;
-  }
-
-.school-box {
-    margin-top: 40px;
+.school-container{
     display: flex;
-    position: relative;
+    justify-content: center;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
+    /* width: 100%; */
 
-.school-box .card {
+}
+.school-content{
     margin: 10px;
-    padding: 20px;
-    text-align: center;
-    height: 100%;
-    width: 350px;
-    /* background: rgba(237, 243, 243, 0.803); */
-    background:#ccc;
-    border-radius: 10px;
-}
-#section-text {
-    color: rgb(137, 101, 186);
-    font-weight: bold;
+    background: rgba(114, 117, 114, 0.7);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
 }
 
-.section-card{
-    -webkit-box-shadow: 0 10px 6px -6px #777;
-       -moz-box-shadow: 0 10px 6px -6px #777;
-            box-shadow: 0 10px 6px -6px #777;
+.text-container{
+    inline-size: 349px;
+    overflow: hidden;
+    padding: 5px;
 }
-.documents {
-    display: flex;
-    grid-template-columns: 100px 50px 100px;
-    grid-template-rows: 80px auto 80px; 
-    column-gap: 10px;
-    row-gap: 15px;
-    justify-content: center;
-}
-/* Articles styles */
-#article-text {  
-    font-size: medium;
-    color: rgb(255, 255, 255);
-    text-transform: capitalize;
-    font-weight: bold;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-}
-a:link { text-decoration: none; }
 
-#article-title {
-    text-align: center;
-}
+
 

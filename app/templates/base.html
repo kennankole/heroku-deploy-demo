@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="{{url_for('static', filename='index.css') }}">
+    
     {% block styles %}
     {% endblock styles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,51 +20,102 @@
     <div class="brand">
         <img src="{{ url_for('static', filename='photos/logo.png' )}}" alt="" class="logo" >
       </div>
-
     <nav class="nav">
         {% if current_user.is_authenticated %}
         <a href="{{ url_for('home.home_page') }}" class="nav-link">Home</a>
         <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
         <a href="{{ url_for('home.school' ) }}" class="nav-link">Online School Of The Prophets</a>
-        <a href="#" class="nav-link">Support us</a>
-        <a href="#" class="nav-link">About us</a>
+        <a href="{{ url_for('home.support') }}" class="nav-link">Support us</a>
+        <a href="{{ url_for('auth.account' ) }}" class="nav-link">Profile</a>
+        {% if current_user.email in email %}
+        <a href="{{ url_for('home.upload_articles', id=current_user.id )}}" class="nav-link">Upload Article</a>
+        {% endif %}
         {% else %}
+        <a href="{{ url_for('home.home_page') }}" class="nav-link">Home</a>
+        <a href="{{ url_for('home.school' ) }}" class="nav-link">Online School Of The Prophets</a>
+        <a href="{{ url_for('home.support') }}" class="nav-link">Support us</a>
         <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
         {% endif %}
     </nav>
     {% endblock header %}
     <script src="{{url_for('static', filename='js/index.js') }}"></script>
     {% block content %}
+    <h1 class="title-text animate__animated animate__zoomIn">Bread Of Life Ministry, Kenya.</h1>
     <div class="container">
-        <div class="home-page">
-            <h1 class="animate__animated animate__zoomIn">Bread Of Life Ministry, Kenya.</h1>
+        <div class="about-us">
+            <h2 id="text" class="animate__animated animate__zoomIn">About Us.</h2>
+            <p id="text" class="animate__animated animate__zoomIn">
+                Our mission is to prepare Seventh-day Adventists for the soon-coming Sunday law crisis 
+                and to teach the everlasting gospel of the three angels’ messages of Revelation 
+                14 through seminars, video productions and written publications.
+                <br>
+                <br>
+                We believe that we are living in the last generation, 
+                for whom the entire Bible has been written. 
+                Each of the ancient prophets spoke less for their own time than for ours, 
+                so that their prophesying is in force for us. The different stories 
+                in the Bible typify events that will take place at the end of the world. 
+                History will repeat itself. 
+                <br>
+                <br>
+                We aim to teach the scriptures “line upon line” 
+                in light of their prophetic application to the final generation. 
+                This constitutes the “present truth” for this time, which is needed 
+                to prepare the church to receive the “latter rain.” 
+                By understanding the spiritual application of these histories, 
+                we can understand what “righteousness by faith” means and enter in 
+                to the true born-again experience.
+                <br>
+                <br>
+                <a href="{{url_for('home.support')}}"><em>Support Us.
+                    <i class="fa-solid fa-circle-dollar-to-slot fa-2x"></i>
+                </em></a>
+            </p>
         </div>
-    </div >
+    </div>
     {% endblock content%}
+    <footer class="footer-distributed">
 
-    <!--Footer-->
-    {% block footer %}
-    <footer id="footer-content">
-        <div class="footer-content">
-        <div class="footer">
-            <div class="footer-box">
-                <div class="media media1">
-                    <a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                </div>
-                <div class="media media2">
-                    <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                </div>
-                <div class="media media3">
-                    <a href="#"><i class="fa fa-youtube"></i></a>
-                </div>
-                <div class="media media4">
-                    <a href="#"><i class="fa fa-telegram" aria-hidden="true"></i></a>
-                </div>
+        <div class="footer-left">
+      <img src="{{ url_for('static', filename='photos/logo.png' )}}" alt="" class="footer-img">
+            <h3>Bread <span>Of Life</span></h3>
+
+            <p class="footer-company-name">© Bread Of Life Ministry 2022.</p>
+        </div>
+
+        <div class="footer-center">
+            <h4 id="text">Contact Persons</h4>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+254 720 519 019</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+254 704 736 961</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:breadoflife1335@gmail.com">breadoflife1335@gmail.com</a></p>
             </div>
         </div>
-    </footer> 
-    {% endblock footer %} 
-    
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>Follows us on social media</span>
+            </p>
+            <div class="footer-icons">
+                <a href="https://t.me/+GEeIdp31O8QwNWQ0" target="_blank">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCRl3hHCwDRH2CwbV2jwjlQA" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
     {% block end %}{% endblock end %}
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 </body>
 </html>
+
+

@@ -1,21 +1,48 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
     <title>Account</title>
 {% endblock title %}
-
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
 {% block content %}
-    {% if current_user.is_authenticated %}
-        <p>
-            Hello {{ current_user.username }}
-            {{ current_user.id }}
-        </p>
-        <p>Profile picture</p>
-        <img src="{{ current_user.profile_pic }}" alt="" height="150px" width="150px">
-        <br>
-        <hr>
-        <a href="{{ url_for('auth.logout') }}">+Logout</a>
-    {% else %}
-        <a href="{{ url_for('auth.login') }}">+Login</a>
+    {% if current_user.is_authenticated and current_user.email in emails %}
+    <div class="profile">
+        <div class="profile-task">
+            <img src="{{ current_user.profile_pic }}" alt="" height="130px" width="130px" class="profile-img">
+        </div>
+        <div class="profile-task animate__animated animate__zoomIn" id="text">
+                <i class="fa-solid fa-user-check fa-2x" ></i>
+                <h5 id="text">{{ current_user.username }}</h5> 
+        </div>
+        <div class="profile-task animate__animated animate__zoomIn" id="profile-text">
+            <a href="{{ url_for('home.upload_articles', id=current_user.id )}}">
+                <i class="fa-solid fa-upload fa-2x"></i>
+                <h5 id="text">Upload Article</h5>
+            </a>
+        </div>
+        <div class="profile-task animate__animated animate__zoomIn">
+            <a href="#" class="profile-link">
+                <i class="fa-solid fa-person-chalkboard fa-2x"></i>
+                <h5 id="text">Create lesson</h5> 
+            </a>
+        </div>
+        {% else %}
+        <div class="profile">
+            <div class="profile-task">
+                <img src="{{ current_user.profile_pic }}" alt="" height="130px" width="130px" class="profile-img">
+            </div>
+            <div class="profile-task animate__animated animate__zoomIn" id="text">
+                    <i class="fa-solid fa-user-check fa-2x" ></i>
+                    <h5 id="text">{{ current_user.username }}</h5>
+            </div>
+        <div class="profile-task animate__animated animate__zoomIn">
+            <a href="{{ url_for('school.school_home')}}" class="profile-link">
+                <i class="fa-solid fa-school fa-2x"></i>
+                <h5 id="text">Lessons</h5>
+            </a>
+        </div>
     {% endif %}
+    </div>
 {% endblock content %}

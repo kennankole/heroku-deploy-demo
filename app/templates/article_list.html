@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/school.css' )}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/article.css' ) }}">
+<link href="https://unpkg.com/aos@2.4.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.4.1/dist/aos.js"></script>
+{% endblock styles %}
+<h1 id="article-title" class="animate__animated animate__zoomIn"></h1>
+    {% for i in docs %}
+    <div class="article-class animate__animated animate__zoomIn">
+        <div class="article-details">
+            <div class="thumbnail">
+                <a href="{{url_for('home.uploaded_file', name=i.pdf_file)}}" target="_blank">
+                    <img src="{{ url_for('static', filename='photos/'+ i.pdf_thumbnail  )}}" alt="" height="254" width="193">
+                </a>
+            </div>
+        </div>
+        <div class="article-details detail-text">
+            <div class="article-text">
+                <h4 id="text"> Name: {{ i.title }}</h4>
+                <h4 id="text"> Author:  {{ current_user.username }}</h4>
+                <h4 id="text">Date published: {{ i.date.strftime('%B %d, %Y') }}</h4>
+                <a href="{{url_for('home.uploaded_file', name=i.pdf_file)}}" target="_blank"> Read </a>
+            </div>
+        </div>
+    </div>
+        <!-- <a href="https://{{bucket_name}}.s4.{{bucket_location}}.amazonaws.com/{{i}}">+View Image</a> -->
+{% endfor %}
+{% if not docs %}
+<p id="text" style="text-align: center; font-size: 20px; font-weight: bold;">No articles at the moment, kindly check later, or Subscribe to get an email once articles are loaded </p>
+{% endif %}
+{% endblock content %}
+
+

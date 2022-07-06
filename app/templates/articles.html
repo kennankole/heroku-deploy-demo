@@ -3,29 +3,27 @@
 {% block content %}
 {% block styles %}
 <link rel="stylesheet" href="{{url_for('static', filename='css/school.css' )}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/article.css' ) }}">
+<link href="https://unpkg.com/aos@2.4.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.4.1/dist/aos.js"></script>
 {% endblock styles %}
-{% if not docs %}
-<form action="" enctype="multipart/form-data" method="post">
-    <input type="file" name="file">
-    <input type="submit" value="Upload">
-</form>
-{% else %}
-<h1 id="article-title" class="animate__animated animate__zoomIn">Articles.</h1>
-    {% for i in docs %}
-<div class="documents">
-    <a href="{{url_for('home.uploaded_file', name=i)}}" target="_blank">
-        <br>
-        <br>
-        <h3 class="animate__animated animate__zoomIn" id="article-text">
-            Article Name
-        </h3>
-        <embed src="{{url_for('static' , filename='documents/' +i) }}#view=fitH" type="application/pdf" height="600" width="500"> 
-    </a>
-    
+
+<div class="form-class">
+    <form action="" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label for="exampleFormControlFile1" id="text">Upload file</label>
+            <input type="file" class="form-control-file" id="text" name="file">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1" id="text">Article title </label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Article title..." name="name">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn-secondary" id="text">Submit</button>
+        </div>
+    </form>
 </div>
-        <!-- <a href="https://{{bucket_name}}.s3.{{bucket_location}}.amazonaws.com/{{i}}">+View Image</a> -->
-{% endfor %}
-{% endif %}
+
 {% endblock content %}
 
 

@@ -6,7 +6,6 @@ import json
 
 from flask import redirect, render_template, request, url_for, Blueprint
 from flask_login import (
-    current_user,
     login_required,
     login_user,
     logout_user
@@ -15,7 +14,7 @@ from app import db
 from app.models import User
 from app.config import Config
 from app import login_manager
-from app.utils import get_google_provider_cfg
+from app.utils import get_google_provider_cfg, authorize_emails
 
 auth = Blueprint('auth', __name__)
 
@@ -80,22 +79,22 @@ def callback():
         force=True,
         remember=True
     )
-    return redirect(url_for('auth.index'))
+    return redirect(url_for('auth.account'))
 
 
 @auth.route('/logout', methods=['GET'])
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.index'))
+    return redirect(url_for('home.home_page'))
 
-
+@login_required
 @auth.route('/account', methods=['GET'])
-def index():
-    return render_template('auth/account.html')
+def account():
+    emails = authorize_emails
+    return render_template('auth/account.html', emails=emails)
     
-
-  
+ 
 @login_manager.user_loader
 def load_user(user_unique_id):
     return User.query.filter_by(unique_id=user_unique_id).first()
