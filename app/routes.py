@@ -7,7 +7,8 @@ from flask_login import login_required, current_user
 
 from app.utils import (
     allowed_file, save_photo, 
-    authorize_emails, s3_pdf_file_upload, s3_pdf_thumbnail_file_upload
+    authorize_emails, s3_pdf_file_upload, s3_pdf_thumbnail_file_upload,
+    pdf_thumbnail
 )
 
 from app import create_app, db
@@ -76,17 +77,9 @@ def upload_articles(id):
             
             return redirect(url_for('home.list_documents'))  
         return render_template('articles.html')
-    return render_template('upload_404.html')
+    else:
+        return render_template('upload_404.html')
 
-
-#Generate first pdf page as a thumbnail
-def pdf_thumbnail(pdf_name):
-    app = create_app()
-    cache_path = os.path.join(app.root_path, "static/documents/thumbnails")
-    thumbnail_preview_path = os.path.join(app.root_path, "static/documents/"+ pdf_name)
-    manager = PreviewManager(cache_path, create_folder=True)
-    pdf_to_preview_path = manager.get_jpeg_preview(thumbnail_preview_path)
-    return pdf_to_preview_path
 
 
 @home.route('/uploaded/files/<name>', methods=['GET', 'POST'])
@@ -99,11 +92,11 @@ def list_documents():
     emails = authorize_emails
     return render_template('article_list.html', docs=docs, emails=emails)
 
-@home.route('/s3-detail/view', methods=['GET'])
-def view_s3_files():
-    bucket_name = Config.AWS_BUCKET_NAME
-    bucket_location = Config.BUCKET_REGION
-    return render_template("articles.html", bucket_location=bucket_location,bucket_name=bucket_name)
+# @home.route('/s3-detail/view', methods=['GET'])
+# def view_s3_files():
+#     bucket_name = Config.AWS_BUCKET_NAME
+#     bucket_location = Config.BUCKET_REGION
+#     return render_template("articles.html", bucket_location=bucket_location,bucket_name=bucket_name)
     
     
 

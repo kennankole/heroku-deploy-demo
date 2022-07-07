@@ -81,9 +81,8 @@ def callback():
     )
     return redirect(url_for('auth.account'))
 
-
-@auth.route('/logout', methods=['GET'])
 @login_required
+@auth.route('/logout', methods=['GET'])
 def logout():
     logout_user()
     return redirect(url_for('home.home_page'))
@@ -98,4 +97,5 @@ def account():
 @login_manager.user_loader
 def load_user(user_unique_id):
     return User.query.filter_by(unique_id=user_unique_id).first()
+   
 

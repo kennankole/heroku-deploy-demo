@@ -27,6 +27,7 @@ pyscribus = "*"
 drawio = "*"
 rawpy = "*"
 vtk = "*"
+pytest-mock = "*"
 
 [dev-packages]
 

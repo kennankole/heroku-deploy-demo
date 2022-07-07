@@ -6,6 +6,7 @@ import boto3
 from app.config import Config as AppConfig
 from botocore.config import Config
 from app import create_app
+from preview_generator.manager import PreviewManager
 
 
 authorize_emails = [
@@ -29,7 +30,7 @@ def allowed_file(filename):
 
 
 def get_google_provider_cfg():
-    return requests.get(os.getenv('GOOGLE_DISCOVER_URL').json())
+    return requests.get(AppConfig.GOOGLE_DISCOVERY_URL).json()
 
 
 def save_photo(picture):
@@ -114,5 +115,11 @@ def s3_pdf_thumbnail_file_upload(path, filename):
     return http_response
 
 
-
+def pdf_thumbnail(pdf_name):
+    app = create_app()
+    cache_path = os.path.join(app.root_path, "static/documents/thumbnails")
+    thumbnail_preview_path = os.path.join(app.root_path, "static/documents/"+ pdf_name)
+    manager = PreviewManager(cache_path, create_folder=True)
+    pdf_to_preview_path = manager.get_jpeg_preview(thumbnail_preview_path)
+    return pdf_to_preview_path
 
