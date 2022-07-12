@@ -81,10 +81,9 @@ def upload_articles(id):
         return render_template('upload_404.html')
 
 
-
-@home.route('/uploaded/files/<name>', methods=['GET', 'POST'])
-def uploaded_file(name):
-    return send_from_directory(os.path.join(app.root_path, 'static/documents'), name)
+# @home.route('/uploaded/files/<name>', methods=['GET', 'POST'])
+# def uploaded_file(name):
+#     return send_from_directory(os.path.join(app.root_path, 'static/documents'), name)
 
 @home.route('/documents', methods=['GET', 'POST'])
 def list_documents():

@@ -1,6 +1,6 @@
 import pytest
 from app.models import User 
-from app import create_app
+
 
 
 @pytest.fixture(scope='module')
@@ -13,12 +13,13 @@ def test_new_user(creating_new_user, client):
     assert creating_new_user.email == "anko@bol.com"
     assert creating_new_user.username == "ankole"
     assert creating_new_user.profile_pic == "avatar.jpg"
-    
+  
+        
     
 def test_login_page(client):
     assert client.post('/login').status_code == 302
     assert client.get('/').status_code == 200
-   
+    
    
 def test_login_index_page(client):
     assert client.get('/').status_code == 200

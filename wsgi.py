@@ -9,7 +9,8 @@ if __name__ == '__main__':
     # app.run(debug=True)
     if Config.FLASK_ENV == "development":
         print("development")
-        app.run(ssl_context="adhoc", debug=True)
+        #app.run(ssl_context="adhoc", debug=True, host='0.0.0.0', port=443) docker https 
+        app.run(ssl_context="adhoc")
     else:
         # Talisman(app, content_security_policy=None)
         app.run(ssl_context="adhoc", debug=False)

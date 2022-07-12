@@ -56,3 +56,15 @@ def mock_my_model():
 def mock_get_sqlalchemy(mocker):
     mock = mocker.patch("flask_sqlalchemy._QueryProperty.__get__").retun_value = mocker.Mock()
     return mock
+
+
+# Mock the db
+@pytest.fixture
+def app_test():
+    app = create_app()
+    app.config.from_object('app.config.TestConfig')
+    with app.app_context():
+        db.create_all()
+        yield app
+        db.session.remove()
+        db.drop_all()
