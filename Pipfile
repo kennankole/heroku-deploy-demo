@@ -28,6 +28,7 @@ drawio = "*"
 rawpy = "*"
 vtk = "*"
 pytest-mock = "*"
+pyexifinfo = "*"
 
 [dev-packages]
 
