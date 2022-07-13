@@ -1,6 +1,7 @@
 from app import create_app
 from flask_talisman import Talisman
 from app.config import Config
+import exiftool
 
 app = create_app()
 
