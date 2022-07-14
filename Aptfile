@@ -5,7 +5,6 @@ inkscape
 ffmpeg 
 xvfb
 python3-vtk7
-
 poppler-utils 
 libfile-mimeinfo-perl 
 ghostscript 
