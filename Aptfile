@@ -1,6 +1,5 @@
 libimage-exiftool-perl
 scribus
-drawio
 libreoffice 
 inkscape 
 ffmpeg 
@@ -16,3 +15,5 @@ libjpeg-dev
 imagemagick 
 libmagic1 
 webp
+
+# https://api.github.com/repos/jgraph/drawio-desktop/releases/latest | grep browser_download_url | grep '\.rpm' | cut -d '"' -f 4 | wget -i -
