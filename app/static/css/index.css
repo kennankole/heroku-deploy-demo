@@ -9,7 +9,8 @@
 
 /* background image*/
 body {
-    background-image: url("./photos/wheat-field-gc9fc78561_1280.jpg");
+    /* background-image: url("./photos/wheat-field-gc9fc78561_1280.jpg"); */
+	background-image: url("../photos/wheat-field-gc9fc78561_1280.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
