@@ -2,7 +2,7 @@
 
 FROM python:3.8-slim-buster
 
-WORKDIR /application
+# WORKDIR /application
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUBUFFERED 1
@@ -33,15 +33,15 @@ RUN apt-get clean all
 # Installing pip Dependencies
 RUN pip install --upgrade pip && pip install pipenv
 
-COPY ./Pipfile* /application/
+COPY ./Pipfile* ./
 
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
 
-COPY . /application
-RUN addgroup --system app && adduser --system --group app
+COPY . ./
+# RUN addgroup --system app && adduser --system --group app
 
-RUN chown -R app:app /application && chmod -R 755 /application
-USER app
+# RUN chown -R app:app /application && chmod -R 755 /application
+# USER app
 
 
 
