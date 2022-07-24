@@ -21,21 +21,13 @@
         <img src="{{ url_for('static', filename='photos/logo.png' )}}" alt="" class="logo" >
       </div>
     <nav class="nav">
-        {% if current_user.is_authenticated %}
         <a href="{{ url_for('home.home_page') }}" class="nav-link">Home</a>
-        <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
+        <!-- <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a> -->
         <a href="{{ url_for('home.school' ) }}" class="nav-link">Online School Of The Prophets</a>
         <a href="{{ url_for('home.support') }}" class="nav-link">Support us</a>
-        <a href="{{ url_for('auth.account' ) }}" class="nav-link">Profile</a>
-        {% if current_user.email in email %}
-        <a href="{{ url_for('home.upload_articles', id=current_user.id )}}" class="nav-link">Upload Article</a>
-        {% endif %}
-        {% else %}
-        <a href="{{ url_for('home.home_page') }}" class="nav-link">Home</a>
-        <a href="{{ url_for('home.school' ) }}" class="nav-link">Online School Of The Prophets</a>
-        <a href="{{ url_for('home.support') }}" class="nav-link">Support us</a>
-        <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a>
-        {% endif %}
+        <!-- <a href="{{ url_for('auth.account' ) }}" class="nav-link">Profile</a> -->
+        <a href="{{ url_for('home.upload_articles')}}" class="nav-link">Upload Article</a>
+        <!-- <a href="{{ url_for('auth.login') }}" class="nav-link">Login</a> -->
     </nav>
     {% endblock header %}
     <script src="{{url_for('static', filename='js/index.js') }}"></script>

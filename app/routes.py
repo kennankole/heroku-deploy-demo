@@ -34,59 +34,54 @@ def school():
 
 
 # @login_required
-@home.route('/articles/<int:id>/', methods=['POST', 'GET'])
-def upload_articles(id):
-    if current_user.email in authorize_emails:
-        user = User.query.filter_by(id=id).first()
-        if request.method == 'POST':
-            if 'file' not in request.files:
-                flash('No file part')
-            file = request.files['file']
-            name = request.form['name']
-            if file.filename == '':
-                flash('No file selected')
-                return redirect(url_for('home.upload_articles'))
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                # save the Uploaded file
-                # file.save(os.path.join(app.root_path, 'static/documents', filename))
-                file.save(os.path.join(app.root_path, 'media/documents', filename))
-                #Generate a thumbnail from the PDF
-                file_thumbnail = pdf_thumbnail(filename)
-                image_name = file_thumbnail.split('/')
-                #Save the generated thumbnail
-                thumbnail_path = save_photo(file_thumbnail)
-            
+@home.route('/articles', methods=['POST', 'GET'])
+def upload_articles():
+    # if current_user.email in authorize_emails:
+        # user = User.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+        file = request.files['file']
+        name = request.form['name']
+        if file.filename == '':
+            flash('No file selected')
+            return redirect(url_for('home.upload_articles'))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            # save the Uploaded file
+            file.save(os.path.join(app.root_path, 'static/documents', filename))
+            #Generate a thumbnail from the PDF
+            file_thumbnail = pdf_thumbnail(filename)
+            image_name = file_thumbnail.split('/')
+            #Save the generated thumbnail
+            thumbnail_path = save_photo(file_thumbnail)
+        
 
-                new_article = Document(
-                    title=name,
-                    pdf_file=filename,
-                    pdf_thumbnail=thumbnail_path,
-                    author=user.unique_id
-                )
-                db.session.add(new_article)
-                db.session.commit()
-                
-            # Upload pdf file to s3 bucket.
-            # doc_path = os.path.join(app.root_path, 'static/documents', filename)
-            doc_path = os.path.join(app.root_path, 'media/documents', filename)
-            s3_pdf_file_upload(path=doc_path, filename=filename)
+            new_article = Document(
+                title=name,
+                pdf_file=filename,
+                pdf_thumbnail=thumbnail_path,
+            )
+            db.session.add(new_article)
+            db.session.commit()
             
-            # Upload pdf thumbnail to s3
-            # picture_path = os.path.join(app.root_path, 'static/photos', file_thumbnail)
-            picture_path = os.path.join(app.root_path, 'media/photos', file_thumbnail)
-            s3_pdf_thumbnail_file_upload(path=picture_path, filename=image_name[-1])
-            
-            
-            return redirect(url_for('home.list_documents'))  
-        return render_template('articles.html')
-    else:
-        return render_template('upload_404.html')
+        # Upload pdf file to s3 bucket.
+        doc_path = os.path.join(app.root_path, 'static/documents', filename)
+        s3_pdf_file_upload(path=doc_path, filename=filename)
+        
+        # Upload pdf thumbnail to s3
+        picture_path = os.path.join(app.root_path, 'static/photos', file_thumbnail)
+        s3_pdf_thumbnail_file_upload(path=picture_path, filename=image_name[-1])
+        
+        
+        return redirect(url_for('home.list_documents'))  
+    return render_template('articles.html')
+    
 
 
 @home.route('/uploaded/files/<name>', methods=['GET', 'POST'])
 def uploaded_file(name):
-    return send_from_directory(os.path.join(app.root_path, 'media/documents'), name)
+    return send_from_directory(os.path.join(app.root_path, 'static/documents'), name)
 
 @home.route('/documents', methods=['GET', 'POST'])
 def list_documents():

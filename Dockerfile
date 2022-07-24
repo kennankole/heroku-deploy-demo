@@ -24,6 +24,7 @@ RUN apt-get update && \
     && apt-get -y install imagemagick  --no-install-recommends \
     && apt-get -y install libmagic1  --no-install-recommends \
     && apt-get -y install webp  --no-install-recommends \
+    && apt-get -y install netcat --no-install-recommends \
     && rm -fr /var/lib/apt/lists/*
 
 
@@ -36,10 +37,14 @@ COPY ./Pipfile* /application/
 
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system --deploy
 
+COPY . /application
+RUN addgroup --system app && adduser --system --group app
 
-COPY ./entrypoint.sh /application/
-COPY . /application/
-# EXPOSE 5000
+RUN chown -R app:app /application && chmod -R 755 /application
+USER app
+
+
+
 
 # CMD ["gunicorn", "wsgi:app" , "--bind 0.0.0.0:$PORT]
 # ENTRYPOINT ["/application/entrypoint.sh"]
