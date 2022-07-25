@@ -49,8 +49,8 @@ def upload_articles():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             # save the Uploaded file
-            file.save(os.path.join(app.root_path, 'static/documents', filename))
-            #Generate a thumbnail from the PDF
+            file.save(os.path.join(app.root_path, 'static/docs', filename))
+            # Generate a thumbnail from the PDF
             file_thumbnail = pdf_thumbnail(filename)
             image_name = file_thumbnail.split('/')
             #Save the generated thumbnail
@@ -66,7 +66,7 @@ def upload_articles():
             db.session.commit()
             
         # Upload pdf file to s3 bucket.
-        doc_path = os.path.join(app.root_path, 'static/documents', filename)
+        doc_path = os.path.join(app.root_path, 'static/docs', filename)
         s3_pdf_file_upload(path=doc_path, filename=filename)
         
         # Upload pdf thumbnail to s3
@@ -81,7 +81,7 @@ def upload_articles():
 
 @home.route('/uploaded/files/<name>', methods=['GET', 'POST'])
 def uploaded_file(name):
-    return send_from_directory(os.path.join(app.root_path, 'static/documents'), name)
+    return send_from_directory(os.path.join(app.root_path, 'static/docs'), name)
 
 @home.route('/documents', methods=['GET', 'POST'])
 def list_documents():
