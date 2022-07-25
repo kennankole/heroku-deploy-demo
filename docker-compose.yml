@@ -4,7 +4,40 @@ services:
   web:
     build: .
     command: gunicorn --bind 0.0.0.0:5000 wsgi:app
-    # volumes:
-    #   - static_volume:/application/services/app/static/;
+    volumes:
+      - static_volume:/application/app/static/
+    expose:
+      - 5000
+    # ports:
+    #   - 5000:5000
+  
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/application/app/static/
     ports:
-      - 5000:5000
+      - 1337:80
+      - 443:443
+    depends_on:
+      - web
+
+  
+
+  # https-portal:
+  #   image: steveltn/https-portal:1
+  #   ports:
+  #     - '80:80'
+  #     - '443:443'
+  #   # links:
+  #   #   - web
+  #   restart: always
+
+  #   environment:
+  #     DOMAINS: "flask.local -> http://web:8000"
+  #     # DOMAINS: "demo-app90.herokuapp.com"
+  #     STAGE: "local"
+  #     FORCE_RENEW: "true"
+    
+
+volumes:
+  static_volume:
