@@ -1,7 +1,7 @@
 .support-container{
     padding: 10px;
     margin: auto;
-    width: 50%;
+    /* width: 50%; */
     display: flex;
     background: rgba(114, 117, 114, 0.7);
     border-radius: 20px;

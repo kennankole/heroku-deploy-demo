@@ -67,10 +67,10 @@ body {
 
 .container{
     margin: auto;
-    width: 50%;
     padding: 10px; 
     background: rgba(114, 117, 114, 0.7);
     border-radius: 20px;
+
 }
 
 #text{
@@ -277,4 +277,31 @@ footer{
 
 }
 
+
+/* large*/
+@media (max-width: 1400px) {
+  .container, .support-container {
+    width: 50%;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+	.container, .support-container {
+		width: 75%;
+  }
+}
+
+/* Mobile screen */
+
+@media (max-width: 450px) {
+  .container, .support-container {
+    width: 100%;
+  }
+}
+
   
+
+
+
