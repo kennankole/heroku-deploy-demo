@@ -13,7 +13,7 @@
         <div class="article-details">
             <div class="thumbnail">
                 <a href="{{url_for('home.uploaded_file', name=i.pdf_file)}}" target="_blank">
-                    <img src="{{ url_for('static', filename='photos/'+ i.pdf_thumbnail  )}}" alt="" height="254" width="193">
+                    <img src="{{ url_for('static', filename='photos/'+ i.pdf_thumbnail  )}}" alt="Doc thumbnail" height="254" width="193">
                 </a>
             </div>
         </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-        <a href="https://{{bucket_name}}.s3.{{bucket_location}}.amazonaws.com/{{i}}">+View Image</a>
+        <!-- <a href="https://{{bucket_name}}.s3.{{bucket_location}}.amazonaws.com/{{i}}">+View Image</a> -->
 {% endfor %}
 {% if not docs %}
 <p id="text" style="text-align: center; font-size: 20px; font-weight: bold;">No articles at the moment, kindly check later, or Subscribe to get an email once articles are loaded </p>
