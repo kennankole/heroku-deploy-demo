@@ -98,10 +98,3 @@ def list_documents():
 #     return render_template("articles.html", bucket_location=bucket_location,bucket_name=bucket_name)
     
     
-
-
-
-
-# my_path = os.path.join(MYDIR, 'static/docs')
-# print(MYDIR)
-# print(my_path)

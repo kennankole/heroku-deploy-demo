@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/time.css') }}">
+<script src="{{url_for('static', filename='js/timer.js')}}" defer></script>
+{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="school-content">
-        <h1 id="text" style="text-align: center;">Opening soon!!!</h1>
+<div id="countdown">
+    <h2>Opening in</h2>
+    <div id='tiles'></div>
+    <div class="labels">
+      <li>Days</li>
+      <li>Hours</li>
+      <li>Mins</li>
+      <li>Secs</li>
     </div>
-    
-</div>
+  </div>
 {% endblock content %}

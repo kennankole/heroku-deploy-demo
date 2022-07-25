@@ -117,7 +117,6 @@ def s3_pdf_thumbnail_file_upload(path, filename):
 
 
 def pdf_thumbnail(pdf_name):
-    app = create_app()
     cache_path = os.path.join(MYDIR, "static/docs/thumbnails")
     thumbnail_preview_path = os.path.join(MYDIR, "static/docs/"+ pdf_name)
     manager = PreviewManager(cache_path, create_folder=True)
