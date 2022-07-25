@@ -18,6 +18,7 @@ from app.models import Document, User
 home = Blueprint('home', __name__)
 app = create_app()
 
+MYDIR = os.path.dirname(__file__)
 
 @home.route('/', methods=['GET', 'POST'])
 def home_page():
@@ -36,6 +37,7 @@ def school():
 # @login_required
 @home.route('/articles', methods=['POST', 'GET'])
 def upload_articles():
+    
     # if current_user.email in authorize_emails:
         # user = User.query.filter_by(id=id).first()
     if request.method == 'POST':
@@ -49,7 +51,7 @@ def upload_articles():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             # save the Uploaded file
-            file.save(os.path.join(app.root_path, 'static/docs', filename))
+            file.save(os.path.join(MYDIR, 'static/docs', filename))
             # Generate a thumbnail from the PDF
             file_thumbnail = pdf_thumbnail(filename)
             image_name = file_thumbnail.split('/')
@@ -66,11 +68,11 @@ def upload_articles():
             db.session.commit()
             
         # Upload pdf file to s3 bucket.
-        doc_path = os.path.join(app.root_path, 'static/docs', filename)
+        doc_path = os.path.join(MYDIR, 'static/docs', filename)
         s3_pdf_file_upload(path=doc_path, filename=filename)
         
         # Upload pdf thumbnail to s3
-        picture_path = os.path.join(app.root_path, 'static/photos', file_thumbnail)
+        picture_path = os.path.join(MYDIR, 'static/photos', file_thumbnail)
         s3_pdf_thumbnail_file_upload(path=picture_path, filename=image_name[-1])
         
         
@@ -81,7 +83,7 @@ def upload_articles():
 
 @home.route('/uploaded/files/<name>', methods=['GET', 'POST'])
 def uploaded_file(name):
-    return send_from_directory(os.path.join(app.root_path, 'static/docs'), name)
+    return send_from_directory(os.path.join(MYDIR, 'static/docs'), name)
 
 @home.route('/documents', methods=['GET', 'POST'])
 def list_documents():
@@ -98,3 +100,8 @@ def list_documents():
     
 
 
+
+
+# my_path = os.path.join(MYDIR, 'static/docs')
+# print(MYDIR)
+# print(my_path)

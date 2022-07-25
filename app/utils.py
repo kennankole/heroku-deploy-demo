@@ -8,6 +8,7 @@ from botocore.config import Config
 from app import create_app
 from preview_generator.manager import PreviewManager
 
+MYDIR = os.path.dirname(__file__)
 
 authorize_emails = [
     'kennankole@gmail.com'
@@ -39,7 +40,7 @@ def save_photo(picture):
     random_no = secrets.token_hex(8)
     _, f_ext = os.path.splitext(picture)
     picture_name = random_no + f_ext 
-    picture_path = os.path.join(app.root_path, 'static/photos', picture_name)
+    picture_path = os.path.join(MYDIR, 'static/photos', picture_name)
     
     output_size = (250, 250)
     i = Image.open(picture)
@@ -117,8 +118,8 @@ def s3_pdf_thumbnail_file_upload(path, filename):
 
 def pdf_thumbnail(pdf_name):
     app = create_app()
-    cache_path = os.path.join(app.root_path, "static/documents/thumbnails")
-    thumbnail_preview_path = os.path.join(app.root_path, "static/documents/"+ pdf_name)
+    cache_path = os.path.join(MYDIR, "static/docs/thumbnails")
+    thumbnail_preview_path = os.path.join(MYDIR, "static/docs/"+ pdf_name)
     manager = PreviewManager(cache_path, create_folder=True)
     pdf_to_preview_path = manager.get_jpeg_preview(thumbnail_preview_path)
     return pdf_to_preview_path
