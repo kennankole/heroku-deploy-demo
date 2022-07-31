@@ -280,7 +280,7 @@ footer{
 
 /* large*/
 @media (max-width: 1400px) {
-  .container, .support-container {
+  .container, .support-container, #countdown {
     width: 50%;
   }
 }
@@ -288,7 +288,7 @@ footer{
 
 
 @media (max-width: 768px) {
-	.container, .support-container {
+	.container, .support-container, #countdown {
 		width: 75%;
   }
 }
@@ -296,7 +296,7 @@ footer{
 /* Mobile screen */
 
 @media (max-width: 450px) {
-  .container, .support-container {
+  .container, .support-container, #countdown {
     width: 100%;
   }
 }
