@@ -3,12 +3,13 @@ version: '3.8'
 services:
   web:
     build: .
-    command: gunicorn --bind 0.0.0.0:5000 wsgi:app
+    # command: gunicorn --bind 0.0.0.0:5000 wsgi:app
+    command: gunicorn --certfile=./nginx/cert.pem --keyfile=./nginx/key.pem wsgi:app
     volumes:
       - static_volume:/application/app/static/
       - media_volume:/application/app/static/docs
-    expose:
-      - 5000
+    # expose:
+    #   - 5000
   nginx:
     build: ./nginx
     volumes:
