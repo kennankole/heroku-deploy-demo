@@ -5,8 +5,12 @@ h2{
     font-weight: 9000;
 }
 
+/* 952dcdd00ba7 
+	172.18.0.2 container IP Address
+*/
+
 #countdown{
-	width: 465px;
+	/* width: 465px; */
 	height: 112px;
 	text-align: center;
 	background: #222;

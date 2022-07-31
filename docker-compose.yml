@@ -9,37 +9,20 @@ services:
       - media_volume:/application/app/static/docs
     expose:
       - 5000
-    # ports:
-    #   - 5000:5000
-  
   nginx:
     build: ./nginx
     volumes:
       - static_volume:/application/app/static/
       - media_volume:/application/app/static/docs
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/cert.pem:/etc/nginx/cert.pem
+      - ./nginx/key.pem:/etc/nginx/key.pem
+      - ./app/cerbot/conf:/etc/letsencrypt
+      - ./app/cerbot/www:/var/www/certbot
     ports:
-      - 1337:80
       - 443:443
     depends_on:
       - web
-
-  
-
-  # https-portal:
-  #   image: steveltn/https-portal:1
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   # links:
-  #   #   - web
-  #   restart: always
-
-  #   environment:
-  #     DOMAINS: "flask.local -> http://web:8000"
-  #     # DOMAINS: "demo-app90.herokuapp.com"
-  #     STAGE: "local"
-  #     FORCE_RENEW: "true"
-    
 
 volumes:
   static_volume:
